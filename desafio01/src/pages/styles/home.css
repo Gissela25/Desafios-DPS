@@ -1,7 +1,22 @@
 .center{
     text-align: center;
+    margin-bottom: 100px;
 }
 
 .navb{
     background-color: #000957;
+}
+
+.sp
+{
+    background-color: #EBE645;
+}
+
+.re{
+    color: #344CB7;
+
+}
+
+.name{
+    color: #344CB7;
 }
