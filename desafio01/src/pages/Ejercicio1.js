@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "../components/hookForm";
 import Ficha from "../components/fichaPaciente";
 import { SelectHTMLAttributes } from "react";
-import Select from "react-select";
+//import Select from "react-select";
 const  inicialDatosPaciente = {
     nombres : '',
     apellidos : '',
