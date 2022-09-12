@@ -10,33 +10,7 @@ export default function Ejercicio2() {
     const [conversion, setConversion] = useState('Kilogramos');
     const [resultado, setResultado] = useState(0);
 
-    // useEffect(() =>{
-    //     convert()
-    // },[libras,conversion]);
-
-    // const convert = () => {
-    //     if (conversion == "Kilogramos")
-    //     {
-    //         const kilo = (libras) / (2.204);
-    //         setResultado({
-    //             kilog: kilo
-    //         })
-    //     }
-    //     else if (conversion == "Onzas"){
-    //         const onz = (libras) * (16);
-    //         setResultado({
-    //             kilog: onz
-    //         })
-    //     }
-    //     else{
-    //         const gra = (libras) * (453.592);
-    //         setResultado({
-    //             kilog: gra
-    //         })
-    //     }
-
-    
-
+   
     const convert = () => {
         if (conversion == "Kilogramos")
             return (libras) / (2.204);
@@ -50,14 +24,6 @@ export default function Ejercicio2() {
     useEffect(() => {
         setResultado(convert())
     }, [libras, conversion]);
-
-
-    // useEffect(() => {
-    //     setResultado(convert())
-    // }, [libras, conversion]);
-
-   
-
 
     return (  <>
             <ConverForm
