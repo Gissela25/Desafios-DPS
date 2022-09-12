@@ -103,11 +103,6 @@ const validacionesForm = (datosPaciente) => {
 };
 
 const Ejercicio1 = () => {
-    const options = [
-        {value:'masculino', label:'Masculino'},
-        {value:'femenino', label:'Femenino'},
-        {value: 'indefinido', label:'Helicoptero de combate'}
-    ]
     const {
         datosPaciente,
         pacientes,

@@ -35,14 +35,6 @@ export const useForm = (inicialDatosPaciente, validacionesForm) =>
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-       /* setErrores(validacionesForm(datosPaciente));
-
-        if(Object.keys(errores).length === 0)
-        {
-
-        }else{
-            return;
-        }*/
     };
 
     return{
