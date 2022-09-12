@@ -122,7 +122,7 @@ const Ejercicio1 = () => {
         <div className="col-md-6">
             <input type="text" 
             name="nombres" 
-            placeholder="Debes tu nombre" 
+            placeholder="Debes ingresar el nombre" 
             onChange={handleChange}
             onBlur = {handleBlur} 
             value={datosPaciente.nombres}
