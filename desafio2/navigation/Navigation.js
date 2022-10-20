@@ -1,7 +1,7 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Shop from '../exercise03/Shop';
-import Coin from '../exercise02/Coin';
-import Calculadore from '../exercise01/Calculadore';
+import Coin from '../exercise02/CoinScreen';
+import Calculator from '../exercise01/CalculatorScreen';
 const Drawer = createDrawerNavigator();
 
 export default function Navigation() {
@@ -20,7 +20,7 @@ export default function Navigation() {
             }}
 
             >
-            <Drawer.Screen name="Calculadore" component={Calculadore}  options={{
+            <Drawer.Screen name="Calculadore" component={Calculator}  options={{
                 title: 'Calculadora', headerTitleAlign: 'center',
             }} />
             <Drawer.Screen name="Coin" component={Coin} options={{
