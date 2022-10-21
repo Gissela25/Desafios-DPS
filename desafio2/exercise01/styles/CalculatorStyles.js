@@ -24,11 +24,11 @@ const CalculatorStyles = StyleSheet.create({
     lastTextResult:{
         color:'#979792',
         marginRight:15,
-        fontSize:25,
+        fontSize:20,
         alignSelf:'flex-end'
     },
     textResult:{
-        margin:18,
+        margin:10,
         marginRight:20,
         fontSize:40
     },

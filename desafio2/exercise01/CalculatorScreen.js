@@ -118,6 +118,39 @@ export default function Calculator({navigation}) {
 
     }
 
+    const handleSign = () =>{
+
+        const splitNumbers = currentQuantity.split(' ')
+        const fistNumber = parseFloat(splitNumbers[0])
+        const lastNumber = parseFloat(splitNumbers[2])
+        const operator = splitNumbers[1];
+        let tempN1 = 0 ;
+        let tempN2 = 0 ;
+
+        if(Number.isNaN(lastNumber) & !Number.isNaN(fistNumber) )
+        {
+           if(typeof(operator) == 'undefined')
+           {
+            tempN1 = fistNumber * -1;
+            setCurrentQuantity(tempN1 )
+            return
+           }
+           else{
+            tempN1 = fistNumber * -1;
+            setCurrentQuantity(tempN1 + " " + operator)
+            return
+           }
+        }
+        else if(!Number.isNaN(fistNumber) & !Number.isNaN(lastNumber))
+        {
+            tempN1 = fistNumber * -1;
+            tempN2 = lastNumber * -1;
+            setCurrentQuantity(tempN1 + " " + operator + " " + tempN2);
+            return
+        }
+        
+    }
+
     const handleButton = (buttonPressed) =>{
 
         try {
@@ -140,7 +173,7 @@ export default function Calculator({navigation}) {
                 Calcular()
                 return
             case '+/-':
-                setCurrentQuantity(currentQuantity * -1)
+                handleSign();
                 return
         }
         } catch (error) {
