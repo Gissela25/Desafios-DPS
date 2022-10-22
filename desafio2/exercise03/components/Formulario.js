@@ -6,7 +6,13 @@ const Formulario = ({ modalVisible, setRegistros, registros, registro, setRegist
     const [id, setId] = useState('')
     const [cantidad, setCantidad] = useState('')
     const [precio, setPrecio] = useState('')
-   
+    const [error, setError] = useState('')
+    const [error2, setError2] = useState('')
+    const [error3, setError3] = useState('')
+    let regexFloat = /^[0-9]{0,}[.]?[0-9]{0,}?$/gm;
+    let regexInt = /[0-9]+/gm;
+    let regexString = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü0-9]+$/gm;
+
     useEffect(() => {
         if (Object.keys(registro).length > 0) {
             setId(registro.id)
@@ -25,7 +31,6 @@ const Formulario = ({ modalVisible, setRegistros, registros, registro, setRegist
             )
             return
         }
-
         const nuevoRegistro = {
             producto,
             precio,
@@ -34,6 +39,7 @@ const Formulario = ({ modalVisible, setRegistros, registros, registro, setRegist
 
         if (id) {
             //Editando
+            if (regexInt.test(cantidad) && regexFloat.test(precio) && regexString.test(producto)) {
             nuevoRegistro.id = id
             const registrosactualizados = registros.map(registroState =>
                 registroState.id === nuevoRegistro.id ? nuevoRegistro :
@@ -41,18 +47,55 @@ const Formulario = ({ modalVisible, setRegistros, registros, registro, setRegist
 
             setRegistros(registrosactualizados)
             setRegistro({})
+            cerrarModal()
+            setId('')
+            setProducto('')
+            setPrecio('')
+            setCantidad('')
+            } else if (cantidad !== "" && !regexInt.test(cantidad) && precio !== "" && !regexFloat.test(precio) && producto !== "" && !regexString.test(producto)) {
+                if(cantidad !== "" && !regexInt.test(cantidad)){
+                 setError('Debes ingresar solo números enteros')
+                }
+                if(precio !== "" && !regexFloat.test(precio)){
+                 setError2('Debes ingresar solo decimales o enteros')
+                }
+                if(!regexString.test(producto)){
+                 setError3('Debes ingresar solo números y letras')
+                }
+                 Alert.alert(
+                     'Error',
+                     'Debe Ingresar el formato correcto',
+                 )
+                 return
+             }
         }
         else {
             //Nuevo
-            nuevoRegistro.id = Date.now()
-            setRegistros([...registros, nuevoRegistro])
+            if (regexInt.test(cantidad) && regexFloat.test(precio) && regexString.test(producto)) {
+                nuevoRegistro.id = Date.now()
+                setRegistros([...registros, nuevoRegistro])
+                cerrarModal()
+                setId('')
+                setProducto('')
+                setPrecio('')
+                setCantidad('')
+            } else if (cantidad !== "" && !regexInt.test(cantidad) && precio !== "" && !regexFloat.test(precio) && producto !== "" && !regexString.test(producto)) {
+               if(cantidad !== "" && !regexInt.test(cantidad)){
+                setError('Debes ingresar solo números enteros')
+               }
+               if(precio !== "" && !regexFloat.test(precio)){
+                setError2('Debes ingresar solo decimales o enteros')
+               }
+               if(!regexString.test(producto)){
+                setError3('Debes ingresar solo números y letras')
+               }
+                Alert.alert(
+                    'Error',
+                    'Debe Ingresar el formato correcto',
+                )
+                return
+            }
         }
-
-        cerrarModal()
-        setId('')
-        setProducto('')
-        setPrecio('')
-        setCantidad('')
     }
     return (
         <Modal
@@ -82,10 +125,12 @@ const Formulario = ({ modalVisible, setRegistros, registros, registro, setRegist
                         value={producto}
                         onChangeText={setProducto}
                     />
+                    <Text style={styles.error}>{error3}</Text>
                 </View>
                 <View style={styles.box}>
                     <Text style={styles.label}>Cantidad</Text>
                     <TextInput
+                        type={Number}
                         style={styles.input}
                         keyboardType='numeric'
                         placeholder='Cantidad del Producto'
@@ -93,6 +138,7 @@ const Formulario = ({ modalVisible, setRegistros, registros, registro, setRegist
                         value={cantidad}
                         onChangeText={setCantidad}
                     />
+                    <Text style={styles.error}>{error}</Text>
                 </View>
                 <View style={styles.box}>
                     <Text style={styles.label}>Precio Unitario</Text>
@@ -104,6 +150,7 @@ const Formulario = ({ modalVisible, setRegistros, registros, registro, setRegist
                         value={precio}
                         onChangeText={setPrecio}
                     />
+                    <Text style={styles.error}>{error2}</Text>
                 </View>
                 <Pressable style={styles.buttonnew}
                     onPress={handleRegistro}
@@ -164,6 +211,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: '800',
         fontSize: 18
+    },
+    error:{
+        fontSize:15,
+        color:'#E94560',
+        fontWeight:'800'
     }
 })
 
