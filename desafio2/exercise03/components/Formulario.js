@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Modal, Text, StyleSheet, View, TextInput, ScrollView, Pressable, Alert } from 'react-native'
 
-const Formulario = ({ modalVisible,setRegistros, registros, registro, setRegistro, cerrarModal }) => {
+const Formulario = ({ modalVisible, setRegistros, registros, registro, setRegistro, cerrarModal }) => {
     const [producto, setProducto] = useState('')
     const [id, setId] = useState('')
     const [cantidad, setCantidad] = useState('')
     const [precio, setPrecio] = useState('')
-    const [descuento, setDescuento] = useState('')
    
-
     useEffect(() => {
         if (Object.keys(registro).length > 0) {
             setId(registro.id)
@@ -61,7 +59,7 @@ const Formulario = ({ modalVisible,setRegistros, registros, registro, setRegistr
             animationType='slide'
             visible={modalVisible}>
             <View style={styles.container}>
-                <Text style={styles.title}>{registro.id ? 'Editar': 'Nueva'} {''}
+                <Text style={styles.title}>{registro.id ? 'Editar' : 'Nueva'} {''}
                     <Text>Registro</Text></Text>
                 <Pressable
                     onLongPress={() => {
@@ -110,7 +108,7 @@ const Formulario = ({ modalVisible,setRegistros, registros, registro, setRegistr
                 <Pressable style={styles.buttonnew}
                     onPress={handleRegistro}
                 >
-                    <Text style={styles.textnew}>{registro.id ? 'Editar': 'Nueva'} Registro</Text>
+                    <Text style={styles.textnew}>{registro.id ? 'Editar' : 'Nueva'} Registro</Text>
                 </Pressable>
             </View>
         </Modal>

@@ -4,6 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 
 const Registro = ({ item, setModalVisible, registroEditar, registroEliminar,setModalFactura, setRegistro }) => {
     const { cantidad, producto, precio, id } = item
+
     return (
             <View style={styles.conteiner}>
             <Pressable style={styles.ticket}

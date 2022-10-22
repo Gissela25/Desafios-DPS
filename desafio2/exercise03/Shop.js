@@ -11,7 +11,6 @@ export default function Shop({ navigation }) {
     const [registros, setRegistros] = useState([])
     const [registro, setRegistro] = useState({})
     const [modalfactura, setModalFactura] = useState(false)
-
     
   const cerrarModal = () => {
     setModalVisible(false)
