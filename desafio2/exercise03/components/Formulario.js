@@ -1,19 +1,77 @@
-import React, { useState } from 'react'
-import { Modal, Text, StyleSheet, View, TextInput, ScrollView, Pressable } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { Modal, Text, StyleSheet, View, TextInput, ScrollView, Pressable, Alert } from 'react-native'
 
-const Formulario = ({ modalVisible, setModalVisible }) => {
+const Formulario = ({ modalVisible,setRegistros, registros, registro, setRegistro, cerrarModal }) => {
     const [producto, setProducto] = useState('')
+    const [id, setId] = useState('')
     const [cantidad, setCantidad] = useState('')
     const [precio, setPrecio] = useState('')
+    const [descuento, setDescuento] = useState('')
+   
+
+    useEffect(() => {
+        if (Object.keys(registro).length > 0) {
+            setId(registro.id)
+            setProducto(registro.producto)
+            setCantidad(registro.cantidad)
+            setPrecio(registro.precio)
+        }
+    }, [registro])
+
+    const handleRegistro = () => {
+        if ([producto, cantidad, precio].includes('')) {
+            //console.log('Todos los campos deben estar completos')
+            Alert.alert(
+                'Error',
+                'Todos los campos son obligatorios',
+            )
+            return
+        }
+
+        const nuevoRegistro = {
+            producto,
+            precio,
+            cantidad
+        }
+
+        if (id) {
+            //Editando
+            nuevoRegistro.id = id
+            const registrosactualizados = registros.map(registroState =>
+                registroState.id === nuevoRegistro.id ? nuevoRegistro :
+                    registroState)
+
+            setRegistros(registrosactualizados)
+            setRegistro({})
+        }
+        else {
+            //Nuevo
+            nuevoRegistro.id = Date.now()
+            setRegistros([...registros, nuevoRegistro])
+        }
+
+        cerrarModal()
+        setId('')
+        setProducto('')
+        setPrecio('')
+        setCantidad('')
+    }
     return (
         <Modal
             animationType='slide'
             visible={modalVisible}>
             <View style={styles.container}>
-                <Text style={styles.title}>Nuevo {''}
+                <Text style={styles.title}>{registro.id ? 'Editar': 'Nueva'} {''}
                     <Text>Registro</Text></Text>
                 <Pressable
-                    onLongPress={() => setModalVisible(!modalVisible)}
+                    onLongPress={() => {
+                        cerrarModal()
+                        setRegistro({})
+                        setId('')
+                        setProducto('')
+                        setPrecio('')
+                        setCantidad('')
+                    }}
                     style={styles.buttoncancelar}>
                     <Text style={styles.textcancelar}>Cancelar</Text>
                 </Pressable>
@@ -41,16 +99,18 @@ const Formulario = ({ modalVisible, setModalVisible }) => {
                 <View style={styles.box}>
                     <Text style={styles.label}>Precio Unitario</Text>
                     <TextInput
-                        keyboardType='decimal-pad'
                         style={styles.input}
+                        keyboardType='numeric'
                         placeholder='Precio Unitario'
                         placeholderTextColor={'#666'}
                         value={precio}
-                        onChange={setPrecio}
+                        onChangeText={setPrecio}
                     />
                 </View>
-                <Pressable style={styles.buttonnew}>
-                    <Text style={styles.textnew}>Agregar Registro</Text>
+                <Pressable style={styles.buttonnew}
+                    onPress={handleRegistro}
+                >
+                    <Text style={styles.textnew}>{registro.id ? 'Editar': 'Nueva'} Registro</Text>
                 </Pressable>
             </View>
         </Modal>
@@ -95,17 +155,17 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '600'
     },
-    buttonnew:{
-        marginVertical:50,
-        backgroundColor:'#CFD2CF',
-        padding:20,
-        borderRadius:20,
-        marginHorizontal:30
+    buttonnew: {
+        marginVertical: 50,
+        backgroundColor: '#CFD2CF',
+        padding: 20,
+        borderRadius: 20,
+        marginHorizontal: 30
     },
-    textnew:{
-        textAlign:'center',
-        fontWeight:'800',
-        fontSize:18
+    textnew: {
+        textAlign: 'center',
+        fontWeight: '800',
+        fontSize: 18
     }
 })
 
