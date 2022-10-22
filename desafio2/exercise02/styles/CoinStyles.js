@@ -22,6 +22,13 @@ const CoinStyles = StyleSheet.create(
         color:'#352F7C',
         padding:15,
         backgroundColor:'#E9E4F2'
+    },
+    textError:{
+        color:'#C12323',
+        fontSize:20,
+        alignContent:'center',
+        textAlign:'center',
+        marginTop:30
     }
 }) 
 export default CoinStyles

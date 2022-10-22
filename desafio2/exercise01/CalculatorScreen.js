@@ -6,7 +6,7 @@ export default function Calculator({navigation}) {
     
     const [lastQuantity, setLastQuantity] = useState('');
     const [currentQuantity, setCurrentQuantity] = useState('');
-    const buttons = ['AC', 'DEL', '!', '√', 7, 8, 9, 'x', 4, 5, 6, '-', 3, 2, 1, '+', '.', 0, '/','^','+/-','Log','=']  
+    const buttons = ['AC', 'DEL', '!', '√', 7, 8, 9, 'x', 4, 5, 6, '-', 3, 2, 1, '+', '.', 0, '/','^','+/-','Log','In','=']  
 
     const getFactorial = numero =>{
             if (numero < 0) numero = numero * -1;
@@ -30,6 +30,27 @@ export default function Calculator({navigation}) {
             }
             else{
                 result = n1 * Math.log10(n2);
+                    return result
+            }
+        }
+        else{
+            return "-∞"
+        }
+        
+
+    }
+
+    const getLogNatural = (n1, n2) => {
+        let result;
+        if(n2 > 0)
+        {
+            if(Number.isNaN(n1))
+            {
+                    result = Math.log(n2);
+                    return result
+            }
+            else{
+                result = n1 * Math.log(n2);
                     return result
             }
         }
@@ -69,6 +90,11 @@ export default function Calculator({navigation}) {
                         setCurrentQuantity((fistNumber / lastNumber).toString())
                         return
                     }
+                    else if(fistNumber !== 0 && lastNumber === 0)
+                    {
+                        setCurrentQuantity("+∞");
+                        return
+                    }
                     else{
                         setCurrentQuantity("NaN");
                         return
@@ -81,7 +107,7 @@ export default function Calculator({navigation}) {
                         return
                     }
                     else{
-                        setCurrentQuantity(fistNumber * (Math.sqrt(lastNumber)).toString())
+                        setCurrentQuantity((fistNumber * Math.sqrt(lastNumber)).toString())
                         return
                     }
 
@@ -106,8 +132,11 @@ export default function Calculator({navigation}) {
                         return
                     }
                 case 'Log':
-                        setCurrentQuantity(getLog(fistNumber, lastNumber));
-                        return
+                        setCurrentQuantity(getLog(fistNumber, lastNumber).toString());
+                        return;
+                case 'In':
+                        setCurrentQuantity(getLogNatural(fistNumber, lastNumber).toString());
+                        return;
 
             }
 
@@ -155,14 +184,15 @@ export default function Calculator({navigation}) {
 
         try {
             if(buttonPressed === '+' | buttonPressed === "-" | buttonPressed === "x" | buttonPressed === "/"  | buttonPressed === "√" | buttonPressed === "!"
-        | buttonPressed === "^" | buttonPressed === "COS" | buttonPressed === "Log"){
+        | buttonPressed === "^" | buttonPressed === "In" | buttonPressed === "Log"){
             setCurrentQuantity(currentQuantity + " " + buttonPressed + " ")
             return
           }
 
         switch(buttonPressed){
             case 'DEL':
-                setCurrentQuantity(currentQuantity.substring(0, (currentQuantity.length -1)))
+                setCurrentQuantity(currentQuantity.substring(0, (currentQuantity.length - 1)))
+                if(currentQuantity == "NaN"){setCurrentQuantity("")} else if(currentQuantity == "-∞" | currentQuantity == "+∞"){setCurrentQuantity("")}
                 return
             case 'AC':
                 setLastQuantity("")
