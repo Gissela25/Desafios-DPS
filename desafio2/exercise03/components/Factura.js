@@ -9,6 +9,9 @@ const Factura = ({ registro, setModalFactura, setRegistro }) => {
     const can = registro.cantidad
     const pre = registro.precio
     const Total = can * pre
+    const porc = desc * 100
+    const descuento = desc * Total
+    const Totalr = Total - descuento
 
     useEffect(() => {
         if (registro.cantidad >= 15 && registro.cantidad <= 49) {
@@ -21,10 +24,6 @@ const Factura = ({ registro, setModalFactura, setRegistro }) => {
             setdesc(0)
         }
     }, [registro.cantidad]);
-
-    const porc = desc * 100
-    const descuento = desc * Total
-    const Totalr = Total - descuento
 
     return (
         <View style={ShopStyle.container3}>
