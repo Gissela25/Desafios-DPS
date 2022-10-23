@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Text, View, StyleSheet, Pressable, TextInput } from 'react-native'
+import ShopStyle from '../styles/ShopStyle'
 import { color } from 'react-native-reanimated'
 
 const Factura = ({ registro, setModalFactura, setRegistro }) => {
@@ -26,79 +27,34 @@ const Factura = ({ registro, setModalFactura, setRegistro }) => {
     const Totalr = Total - descuento
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Factura</Text>
-            <View style={styles.box}>
-                <Text style={styles.text1}>Nombre del Producto:</Text>
-                <Text style={styles.text}>{registro.producto}</Text>
-                <Text style={styles.text1}>Cantidad del Producto:</Text>
-                <Text style={styles.text}>{registro.cantidad}</Text>
-                <Text style={styles.text1}>Precio Unitario:</Text>
-                <Text style={styles.text}>${registro.precio}</Text>
-                <Text style={styles.text1}>Total Sin descuento:</Text>
-                <Text style={styles.text}>${Total}</Text>
-                <Text style={styles.text1}>Porcentaja de Descuento:</Text>
-                <Text style={styles.text}>{porc}%</Text>
-                <Text style={styles.text1}>Descuento:</Text>
-                <Text style={styles.text}>${descuento}</Text>
-                <Text style={styles.text1}>Total:</Text>
-                <Text style={styles.text}>${Totalr}</Text>
+        <View style={ShopStyle.container3}>
+            <Text style={ShopStyle.title3}>Factura</Text>
+            <View style={ShopStyle.box3}>
+                <Text style={ShopStyle.text13}>Nombre del Producto:</Text>
+                <Text style={ShopStyle.text3}>{registro.producto}</Text>
+                <Text style={ShopStyle.text13}>Cantidad del Producto:</Text>
+                <Text style={ShopStyle.text3}>{registro.cantidad}</Text>
+                <Text style={ShopStyle.text13}>Precio Unitario:</Text>
+                <Text style={ShopStyle.text3}>${registro.precio}</Text>
+                <Text style={ShopStyle.text13}>Total Sin descuento:</Text>
+                <Text style={ShopStyle.text3}>${Total}</Text>
+                <Text style={ShopStyle.text13}>Porcentaja de Descuento:</Text>
+                <Text style={ShopStyle.text3}>{porc}%</Text>
+                <Text style={ShopStyle.text13}>Descuento:</Text>
+                <Text style={ShopStyle.text3}>${descuento}</Text>
+                <Text style={ShopStyle.text13}>Total:</Text>
+                <Text style={ShopStyle.text3}>${Totalr}</Text>
             </View>
             <Pressable
-                style={styles.button}
+                style={ShopStyle.button3}
                 onLongPress={() => {
                     setModalFactura(false)
                     setRegistro({})
                 }}
             >
-                <Text style={styles.textbutton}>Cerrar</Text>
+                <Text style={ShopStyle.textbutton3}>Cerrar</Text>
             </Pressable>
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#FECD70',
-        flex: 1
-    },
-    title: {
-        textAlign: 'center',
-        fontSize: 25,
-        fontWeight: '800'
-    },
-    text: {
-        marginHorizontal: 40,
-        fontSize: 20,
-        fontWeight: '500',
-        color: '#495464',
-        marginVertical: 8
-    },
-    button: {
-        backgroundColor: '#E8E8E8',
-        padding: 10,
-        marginHorizontal: 40,
-        marginBottom: 5,
-        marginTop: 10,
-        borderRadius: 20
-    },
-    textbutton: {
-        textAlign: 'center',
-        fontSize: 20,
-        fontWeight: '700'
-    },
-    box: {
-        backgroundColor: '#FFF',
-        marginHorizontal: 20,
-        marginVertical: 20,
-        borderRadius: 20,
-    },
-    text1: {
-        marginHorizontal: 40,
-        fontSize: 22,
-        fontWeight: '700',
-        marginTop: 10,
-    }
-})
-
 export default Factura

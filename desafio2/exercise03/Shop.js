@@ -4,6 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Formulario from './components/Formulario';
 import Registro from './components/Registro';
 import Factura from './components/Factura';
+import ShopStyle from './styles/ShopStyle';
 
 export default function Shop({ navigation }) {
 
@@ -39,16 +40,17 @@ export default function Shop({ navigation }) {
 
     return (
         <View>
-            <Text style={styles.title}>Registro de Compras</Text>
+        <ScrollView>
+            <Text style={ShopStyle.title}>Registro de Compras</Text>
             <Pressable
                 onPress={() => setModalVisible(!modalVisible)}
-                style={styles.button}
+                style={ShopStyle.button}
             >
-                <Text style={styles.buttonText}>Nuevo Registro</Text>
+                <Text style={ShopStyle.buttonText}>Nuevo Registro</Text>
             </Pressable>
 
-            {registros.length === 0 ? <Text style={styles.No}>No existen registros aun</Text> :
-                <FlatList style={styles.list}
+            {registros.length === 0 ? <Text style={ShopStyle.No}>No existen registros aun</Text> :
+                <FlatList style={ShopStyle.list}
                     data={registros}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => {
@@ -87,41 +89,7 @@ export default function Shop({ navigation }) {
                     setRegistro={setRegistro}
                 />
             </Modal>
+            </ScrollView>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    conteiner: {
-        flex: 1
-    },
-    title: {
-        textAlign: 'center',
-        marginTop: 10,
-        fontSize: 20,
-        fontWeight: '600',
-    },
-    button: {
-        backgroundColor: '#FECD70',
-        padding: 12,
-        marginTop: 20,
-        marginLeft: 20,
-        marginRight: 20,
-        borderRadius: 20,
-    },
-    buttonText: {
-        textAlign: 'center',
-        fontSize: 20,
-        fontWeight: '900',
-    },
-    No: {
-        marginTop: 40,
-        textAlign: 'center',
-        fontWeight: '600',
-        fontSize: 20
-    },
-    list: {
-        marginTop: 50,
-        marginHorizontal: 40,
-    }
-})

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import ShopStyle from '../styles/ShopStyle'
 import { Modal, Text, StyleSheet, View, TextInput, ScrollView, Pressable, Alert } from 'react-native'
 
 const Formulario = ({ modalVisible, setRegistros, registros, registro, setRegistro, cerrarModal }) => {
@@ -101,8 +102,8 @@ const Formulario = ({ modalVisible, setRegistros, registros, registro, setRegist
         <Modal
             animationType='slide'
             visible={modalVisible}>
-            <View style={styles.container}>
-                <Text style={styles.title}>{registro.id ? 'Editar' : 'Nueva'} {''}
+            <View style={ShopStyle.container1}>
+                <Text style={ShopStyle.title1}>{registro.id ? 'Editar' : 'Nueva'} {''}
                     <Text>Registro</Text></Text>
                 <Pressable
                     onLongPress={() => {
@@ -113,110 +114,54 @@ const Formulario = ({ modalVisible, setRegistros, registros, registro, setRegist
                         setPrecio('')
                         setCantidad('')
                     }}
-                    style={styles.buttoncancelar}>
-                    <Text style={styles.textcancelar}>Cancelar</Text>
+                    style={ShopStyle.buttoncancelar1}>
+                    <Text style={ShopStyle.textcancelar1}>Cancelar</Text>
                 </Pressable>
-                <View style={styles.box}>
-                    <Text style={styles.label}>Nombre</Text>
+                <View style={ShopStyle.box1}>
+                    <Text style={ShopStyle.label1}>Nombre</Text>
                     <TextInput
-                        style={styles.input}
+                        style={ShopStyle.input1}
                         placeholder='Nombre Producto'
                         placeholderTextColor={'#666'}
                         value={producto}
                         onChangeText={setProducto}
                     />
-                    <Text style={styles.error}>{error3}</Text>
+                    <Text style={ShopStyle.error1}>{error3}</Text>
                 </View>
-                <View style={styles.box}>
-                    <Text style={styles.label}>Cantidad</Text>
+                <View style={ShopStyle.box1}>
+                    <Text style={ShopStyle.label1}>Cantidad</Text>
                     <TextInput
                         type={Number}
-                        style={styles.input}
+                        style={ShopStyle.input1}
                         keyboardType='numeric'
                         placeholder='Cantidad del Producto'
                         placeholderTextColor={'#666'}
                         value={cantidad}
                         onChangeText={setCantidad}
                     />
-                    <Text style={styles.error}>{error}</Text>
+                    <Text style={ShopStyle.error1}>{error}</Text>
                 </View>
-                <View style={styles.box}>
-                    <Text style={styles.label}>Precio Unitario</Text>
+                <View style={ShopStyle.box1}>
+                    <Text style={ShopStyle.label1}>Precio Unitario</Text>
                     <TextInput
-                        style={styles.input}
+                        style={ShopStyle.input1}
                         keyboardType='numeric'
                         placeholder='Precio Unitario'
                         placeholderTextColor={'#666'}
                         value={precio}
                         onChangeText={setPrecio}
                     />
-                    <Text style={styles.error}>{error2}</Text>
+                    <Text style={ShopStyle.error1}>{error2}</Text>
                 </View>
-                <Pressable style={styles.buttonnew}
+                <Pressable style={ShopStyle.buttonnew1}
                     onPress={handleRegistro}
                 >
-                    <Text style={styles.textnew}>{registro.id ? 'Editar' : 'Nueva'} Registro</Text>
+                    <Text style={ShopStyle.textnew1}>{registro.id ? 'Editar' : 'Nueva'} Registro</Text>
                 </Pressable>
             </View>
         </Modal>
     )
 }
 
-const styles = StyleSheet.create({
-    title: {
-        textAlign: 'center',
-        marginTop: 10,
-        fontSize: 30,
-        fontWeight: '600',
-    },
-    container: {
-        backgroundColor: '#FECD70',
-        flex: 1
-    },
-    box: {
-        marginTop: 10,
-        marginHorizontal: 30,
-    },
-    label: {
-        fontWeight: '600',
-        fontSize: 20,
-        marginBottom: 10,
-        marginTop: 15,
-    },
-    input: {
-        backgroundColor: '#FFF',
-        padding: 15,
-        borderRadius: 20,
-    },
-    buttoncancelar: {
-        marginTop: 20,
-        marginHorizontal: 35,
-        backgroundColor: '#B4CDE6',
-        borderRadius: 20,
-        padding: 14,
-    },
-    textcancelar: {
-        textAlign: 'center',
-        fontSize: 16,
-        fontWeight: '600'
-    },
-    buttonnew: {
-        marginVertical: 50,
-        backgroundColor: '#CFD2CF',
-        padding: 20,
-        borderRadius: 20,
-        marginHorizontal: 30
-    },
-    textnew: {
-        textAlign: 'center',
-        fontWeight: '800',
-        fontSize: 18
-    },
-    error:{
-        fontSize:15,
-        color:'#E94560',
-        fontWeight:'800'
-    }
-})
 
 export default Formulario
